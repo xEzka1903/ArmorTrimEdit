@@ -99,7 +99,7 @@ public class ArmorTrimGUI {
         }
     }
 
-    public void fillMaterialSlots(Inventory inv) {
+    private void fillMaterialSlots(Inventory inv) {
         MaterialItem[] items = MaterialItem.values();
         ArmorTrimData data = ArmorTrimController.get().get(player);
         for (int i = 0; i < ArmorTrimGUI.MATERIAL_SLOTS.length; i++) {
