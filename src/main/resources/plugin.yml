@@ -1,25 +1,46 @@
 name: ArmorTrimEdit
-version: '${project.version}'
-author: SM45654
-main: at.sm45654.armortrimedit.ArmorTrimEdit
-api-version: '1.20'
+main: at.vailan.armortrimedit.ArmorTrimEdit
+version: '2.0.12'
+api-version: '1.21'
+description: Allows players to edit Armor Trims
+author: vailan
 
 commands:
   armortrimedit:
+    description: Opens the Armor Trim Editor GUI
+    usage: /armortrimedit
     aliases:
       - armortrim
       - ae
 
 permissions:
-  armortrimedit.add:
-    default: op
-  armortrimedit.remove:
-    default: op
-  armortrimedit.edit:
-    default: op
+  armortrimedit.*:
+    description: Gives access to all ArmorTrimEdit features
     children:
-      - armortrimedit.add
+      - armortrimedit.use
+      - armortrimedit.apply
       - armortrimedit.remove
+    default: op
 
+  armortrimedit.admin:
+    description: Gives access to all ArmorTrimEdit features
+    children:
+      - armortrimedit.use
+      - armortrimedit.apply
+      - armortrimedit.remove
+    default: op
 
+  armortrimedit.use:
+    description: Allows opening & using the Armor Trim Editor GUI
+    children:
+      - armortrimedit.apply
+      - armortrimedit.remove
+    default: true
 
+  armortrimedit.apply:
+    description: Allows adding Armor Trims to items
+    default: true
+
+  armortrimedit.remove:
+    description: Allows removing Armor Trims from items
+    default: true

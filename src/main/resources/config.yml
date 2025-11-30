@@ -1,0 +1,4 @@
+prefix: "§8[§bArmorTrimEdit§8] "
+messages:
+  not-holding-armor: "§cThe item in your hand is not an Armor item!"
+  no-permission: "§4No permission!"
