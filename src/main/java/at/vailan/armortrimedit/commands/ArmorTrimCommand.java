@@ -1,7 +1,7 @@
 package at.vailan.armortrimedit.commands;
 
 import at.vailan.armortrimedit.Permissions;
-import at.vailan.armortrimedit.gui.EditGUIOpener;
+import at.vailan.armortrimedit.gui.ArmorTrimGUIOpener;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -35,7 +35,7 @@ public class ArmorTrimCommand implements CommandExecutor {
             return true;
         }
 
-        EditGUIOpener.open(p);
+        ArmorTrimGUIOpener.open(p);
         return true;
     }
 
