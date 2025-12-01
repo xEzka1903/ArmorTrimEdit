@@ -1,7 +1,6 @@
-# ArmorTrimEdit
-version 2.0.12
+# ArmorTrimEdit v. 2.0.12 for Minecraft 1.21.x
+# Minecraft Paper & Spigot/Bukkit Server Plugin
+# A plugin to Add/Remove armor trims from an armor item easily
 
-Plugin for Minecraft Paper & Spigot/Bukkit Servers
-for Adding/Removing Armor Trims from items
-
-Minecraft version 1.21.x
+© 2025 vailan  
+Licensed under the MIT License
