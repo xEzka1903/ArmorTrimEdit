@@ -41,4 +41,11 @@ public enum MaterialItem {
         return DISPLAY_MAP.get(display.toLowerCase());
     }
 
+    public static MaterialItem fromTrimMaterial(TrimMaterial trim) {
+        for (MaterialItem item : values()) {
+            if (item.trimMaterial == trim) return item;
+        }
+        return null;
+    }
+
 }

@@ -115,7 +115,7 @@ public class ArmorTrimGUI {
             inv.setItem(slot, stack);
         }
     }
-
+    
     private void fillEmptySlots(Inventory inv) {
         for (int slot : ArmorTrimGUI.EMPTY_SLOTS) {
             inv.setItem(slot, newItem("", Material.GRAY_STAINED_GLASS_PANE));

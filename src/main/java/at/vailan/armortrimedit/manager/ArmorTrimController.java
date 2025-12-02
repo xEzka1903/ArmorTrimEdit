@@ -19,6 +19,8 @@ import static at.vailan.armortrimedit.ArmorTrimEdit.getInstance;
 
 public class ArmorTrimController {
 
+    private final SurvivalModeManager survivalManager = new SurvivalModeManager(getInstance());
+
     private static final ArmorTrimController INSTANCE = new ArmorTrimController();
     public static ArmorTrimController get() { return INSTANCE; }
 
@@ -43,7 +45,6 @@ public class ArmorTrimController {
         player.openInventory(gui.getInventory());
     }
 
-
     public void applyTrim(Player player) {
         ArmorTrimData d = get(player);
 
@@ -59,8 +60,19 @@ public class ArmorTrimController {
 
             return;
         }
+
+        PatternItem patternItem = PatternItem.fromTrimPattern(p);
+        MaterialItem materialItem = MaterialItem.fromTrimMaterial(m);
+
+        if (!survivalManager.canApply(player, patternItem, materialItem)) {
+            player.sendMessage(getInstance().getMessage("missing-items"));
+            return;
+        }
+
         meta.setTrim(new ArmorTrim(m, p));
         item.setItemMeta(meta);
+
+        survivalManager.consumeItems(player, patternItem, materialItem);
 
         reset(player);
         refreshGUI(player);
@@ -74,6 +86,17 @@ public class ArmorTrimController {
 
             return;
         }
+
+        ArmorTrim trim = meta.getTrim();
+        if (trim != null) {
+            MaterialItem materialItem = MaterialItem.fromTrimMaterial(trim.getMaterial());
+            PatternItem patternItem = PatternItem.fromTrimPattern(trim.getPattern());
+
+            if (materialItem != null && patternItem != null) {
+                survivalManager.returnItems(player, patternItem, materialItem);
+            }
+        }
+
         meta.setTrim(null);
         item.setItemMeta(meta);
 

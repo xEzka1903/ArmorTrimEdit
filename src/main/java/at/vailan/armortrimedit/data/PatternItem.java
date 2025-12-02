@@ -46,4 +46,12 @@ public enum PatternItem {
 
     public static PatternItem fromDisplay(String display) { return DISPLAY_MAP.get(display.toLowerCase()); }
 
+    public static PatternItem fromTrimPattern(TrimPattern trim) {
+        for (PatternItem item : values()) {
+            if (item.trimPattern == trim) return item;
+        }
+        return null;
+    }
+
+
 }

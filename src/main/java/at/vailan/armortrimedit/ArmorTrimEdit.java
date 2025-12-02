@@ -2,7 +2,6 @@ package at.vailan.armortrimedit;
 
 import at.vailan.armortrimedit.commands.ArmorTrimCommand;
 import at.vailan.armortrimedit.listener.EventListener;
-import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -10,9 +9,7 @@ public final class ArmorTrimEdit extends JavaPlugin {
 
     private static ArmorTrimEdit plugin;
 
-    public static ArmorTrimEdit getInstance() {
-        return plugin;
-    }
+    public static ArmorTrimEdit getInstance() { return plugin; }
 
     @Override
     public void onEnable() {
@@ -21,7 +18,7 @@ public final class ArmorTrimEdit extends JavaPlugin {
         this.getCommand("armortrimedit").setExecutor(new ArmorTrimCommand());
         Bukkit.getPluginManager().registerEvents(new EventListener(), this);
 
-        registerbStats();
+        new MetricsRegistry(this);
 
         getLogger().info("Plugin enabled.");
     }
@@ -39,11 +36,6 @@ public final class ArmorTrimEdit extends JavaPlugin {
         String msg = getConfig().getString("messages." + key);
         if (msg == null) msg = "§cMissing message: " + key;
         return getPrefix() + msg;
-    }
-
-    public void registerbStats() {
-        int pluginId = 18797;
-        new Metrics(plugin, pluginId);
     }
 
 }

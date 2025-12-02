@@ -1,4 +1,7 @@
 prefix: "§8[§bArmorTrimEdit§8] "
 messages:
-  not-holding-armor: "§cThe item in your hand is not an Armor item!"
   no-permission: "§4No permission!"
+  not-holding-armor: "§cThe item in your hand is not an Armor item!"
+  missing-items: "§cYou don't have the required items in your inventory!"
+survival-mode:
+  enabled: false
