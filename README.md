@@ -3,7 +3,7 @@
 # A plugin to Add/Remove armor trims from an armor item easily
 
 Commands:
-/armortrimedit
+- /armortrimedit
 
 Permissions:
 - armortrimedit.admin (all features)
