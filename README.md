@@ -6,10 +6,10 @@ Commands:
 /armortrimedit
 
 Permissions:
-armortrimedit.admin (all features)
-armortrimedit.use (apply & remove armor trims)
-armortrimedit.apply (add armor trims only)
-armortrimedit.remove (remove armor trims only)
+- armortrimedit.admin (all features)
+- armortrimedit.use (apply & remove armor trims)
+- armortrimedit.apply (add armor trims only)
+- armortrimedit.remove (remove armor trims only)
 
 Usage:
 1. Hold a piece of armor in your main hand
