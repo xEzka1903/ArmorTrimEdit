@@ -44,16 +44,14 @@ public class ArmorTrimCommand implements CommandExecutor {
 
         Material m = item.getType();
 
-        if (m == Material.TURTLE_HELMET || m == Material.ELYTRA) {
-            return false;
-        }
+        if (m == Material.TURTLE_HELMET) return false;
 
-        EquipmentSlot slot = m.getEquipmentSlot();
+        if (m.name().endsWith("_HELMET")) return true;
+        if (m.name().endsWith("_CHESTPLATE")) return true;
+        if (m.name().endsWith("_LEGGINGS")) return true;
+        if (m.name().endsWith("_BOOTS")) return true;
 
-        return slot == EquipmentSlot.HEAD
-            || slot == EquipmentSlot.CHEST
-            || slot == EquipmentSlot.LEGS
-            || slot == EquipmentSlot.FEET;
+        return false;
 
     }
 

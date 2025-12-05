@@ -1,9 +1,9 @@
 name: ArmorTrimEdit
 main: at.vailan.armortrimedit.ArmorTrimEdit
-version: '2.1.0'
+version: '${project.version}'
 api-version: '1.21'
 description: Allows players to edit Armor Trims
-author: vailan
+author: '${project.author}'
 
 commands:
   armortrimedit:
