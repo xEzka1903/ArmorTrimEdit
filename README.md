@@ -4,6 +4,8 @@
 
 Commands:
 - /armortrimedit
+- /armortrimedit set [​pattern] [​material]
+- /armortrimedit remove
 
 Permissions:
 - armortrimedit.admin (all features)
