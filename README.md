@@ -32,4 +32,4 @@ All plugin messages can be changed in the config.yml file.
 For a survival friendly experience, survival mode can be enabled in the config.yml file which makes the editor consume/return armor trim templates and materials on use.
 
 © 2026 vailan  
-Licensed under the MIT License
+Licensed under the GNU GENERAL PUBLIC License
