@@ -18,14 +18,12 @@ GUI Usage:
 2. Run /armortrimedit
 3. In the GUI, select a pattern and material
 4. Click the lime concrete to apply the armor trim
-or
-Click the barrier to remove armor trims from the item
+5. or click the barrier to remove armor trims from the item
 
 Command Usage:
 1. Hold a piece of armor in your main hand
 2. Run /armortrimedit set [​pattern] [​material]
-or
-Run /armortrimedit remove
+3. or run /armortrimedit remove
 
 GUI/Command functions can be enabled/disabled in the config.yml file
 
