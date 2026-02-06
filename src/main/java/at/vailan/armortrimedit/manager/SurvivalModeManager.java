@@ -15,7 +15,7 @@ public class SurvivalModeManager {
 
     public SurvivalModeManager(ArmorTrimEdit plugin) {
         this.plugin = plugin;
-        this.enabled = plugin.getConfig().getBoolean("survival-mode.enabled");
+        this.enabled = plugin.getConfig().getBoolean("survival-mode-enabled");
     }
 
     public boolean canApply(Player player, PatternItem patternItem, MaterialItem materialItem) {

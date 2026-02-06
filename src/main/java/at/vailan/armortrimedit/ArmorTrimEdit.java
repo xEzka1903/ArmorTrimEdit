@@ -1,6 +1,6 @@
 package at.vailan.armortrimedit;
 
-import at.vailan.armortrimedit.commands.ArmorTrimCommand;
+import at.vailan.armortrimedit.commands.CommandRegistration;
 import at.vailan.armortrimedit.listener.EventListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -15,10 +15,11 @@ public final class ArmorTrimEdit extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         this.saveDefaultConfig();
-        this.getCommand("armortrimedit").setExecutor(new ArmorTrimCommand());
         Bukkit.getPluginManager().registerEvents(new EventListener(), this);
 
-        new MetricsRegistry(this);
+        new bStats(this);
+
+        new CommandRegistration(this).registerCommands();
 
         getLogger().info("Plugin enabled.");
     }

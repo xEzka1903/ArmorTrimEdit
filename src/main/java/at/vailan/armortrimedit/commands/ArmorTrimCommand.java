@@ -2,40 +2,58 @@ package at.vailan.armortrimedit.commands;
 
 import at.vailan.armortrimedit.Permissions;
 import at.vailan.armortrimedit.gui.ArmorTrimGUIOpener;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
+import at.vailan.minecraftutils.commands.ArgsParser;
+import at.vailan.minecraftutils.commands.SubCommand;
+import org.bukkit.command.*;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.Material;
 
+import java.util.*;
+
 import static at.vailan.armortrimedit.ArmorTrimEdit.getInstance;
 
-public class ArmorTrimCommand implements CommandExecutor {
+public class ArmorTrimCommand extends SubCommand {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean requiresPlayer() { return true; }
 
-        if (!(sender instanceof Player p)) {
-            return true;
-        }
+    @Override
+    public boolean isVisible(CommandSender sender) {
+        return hasRequiredPermission(sender);
+    }
 
-        if (!(p.hasPermission(Permissions.USE)
-                || p.hasPermission(Permissions.APPLY)
-                || p.hasPermission(Permissions.REMOVE))) {
-            p.sendMessage(getInstance().getMessage("no-permission"));
-            return true;
-        }
+    @Override
+    public boolean isAvailable(CommandSender sender) {
+        return hasRequiredPermission(sender);
+    }
+
+    @Override
+    public Collection<String> getRequiredPermissions() {
+        return List.of(Permissions.APPLY, Permissions.REMOVE);
+    }
+
+    @Override
+    public String getUsage() {
+        return "/ae";
+    }
+
+    public boolean onCommand(CommandSender sender, Command command, String alias, String commandString, ArgsParser args) {
+
+        if (!(sender instanceof Player p)) { return true; }
 
         ItemStack item = p.getInventory().getItemInMainHand();
 
-        if (!isArmor(item)) {
-            p.sendMessage(getInstance().getMessage("not-holding-armor"));
-            return true;
+        if (getInstance().getConfig().getBoolean("gui-enabled")) {
+
+            if (!isArmor(item)) {
+                p.sendMessage(getInstance().getMessage("not-holding-armor"));
+                return true;
+            }
+
+            ArmorTrimGUIOpener.open(p);
         }
 
-        ArmorTrimGUIOpener.open(p);
         return true;
     }
 

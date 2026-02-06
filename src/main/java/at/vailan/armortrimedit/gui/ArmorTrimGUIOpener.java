@@ -9,4 +9,6 @@ public class ArmorTrimGUIOpener {
         player.openInventory(gui.getInventory());
     }
 
+    private ArmorTrimGUIOpener() {}
+
 }

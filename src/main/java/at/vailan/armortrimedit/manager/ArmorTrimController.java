@@ -1,6 +1,5 @@
 package at.vailan.armortrimedit.manager;
 
-import at.vailan.armortrimedit.gui.ArmorTrimGUI;
 import at.vailan.armortrimedit.data.MaterialItem;
 import at.vailan.armortrimedit.data.PatternItem;
 import at.vailan.armortrimedit.data.ArmorTrimData;
@@ -19,12 +18,19 @@ import static at.vailan.armortrimedit.ArmorTrimEdit.getInstance;
 
 public class ArmorTrimController {
 
-    private final SurvivalModeManager survivalManager = new SurvivalModeManager(getInstance());
-
-    private static final ArmorTrimController INSTANCE = new ArmorTrimController();
-    public static ArmorTrimController get() { return INSTANCE; }
-
+    private final SurvivalModeManager survivalManager;
     private final Map<UUID, ArmorTrimData> trims = new HashMap<>();
+
+    private static final ArmorTrimController INSTANCE =
+            new ArmorTrimController(new SurvivalModeManager(getInstance()));
+
+    private ArmorTrimController(SurvivalModeManager survivalManager) {
+        this.survivalManager = survivalManager;
+    }
+
+    public static ArmorTrimController get() {
+        return INSTANCE;
+    }
 
     public ArmorTrimData get(Player player) {
         return trims.computeIfAbsent(player.getUniqueId(), u -> new ArmorTrimData());
@@ -38,11 +44,6 @@ public class ArmorTrimController {
 
     public void remove(Player player) {
         trims.remove(player.getUniqueId());
-    }
-
-    public void refreshGUI(Player player) {
-        ArmorTrimGUI gui = new ArmorTrimGUI(player);
-        player.openInventory(gui.getInventory());
     }
 
     public void applyTrim(Player player) {
@@ -75,7 +76,6 @@ public class ArmorTrimController {
         survivalManager.consumeItems(player, patternItem, materialItem);
 
         reset(player);
-        refreshGUI(player);
     }
 
     public void removeTrim(Player player) {
@@ -88,19 +88,22 @@ public class ArmorTrimController {
         }
 
         ArmorTrim trim = meta.getTrim();
-        if (trim != null) {
-            MaterialItem materialItem = MaterialItem.fromTrimMaterial(trim.getMaterial());
-            PatternItem patternItem = PatternItem.fromTrimPattern(trim.getPattern());
 
-            if (materialItem != null && patternItem != null) {
-                survivalManager.returnItems(player, patternItem, materialItem);
-            }
+        if (trim == null) {
+            player.sendMessage(getInstance().getMessage("no-armor-trim"));
+            return;
         }
+
+        MaterialItem materialItem = MaterialItem.fromTrimMaterial(trim.getMaterial());
+        PatternItem patternItem = PatternItem.fromTrimPattern(trim.getPattern());
+
+        if (materialItem != null && patternItem != null) {
+            survivalManager.returnItems(player, patternItem, materialItem);
+        }
+
 
         meta.setTrim(null);
         item.setItemMeta(meta);
-
-        refreshGUI(player);
     }
 
     public void select(Player player, String name) {
@@ -112,7 +115,6 @@ public class ArmorTrimController {
         if (pattern != null) {
             d.setPattern(pattern.trimPattern);
 
-            refreshGUI(player);
             return;
         }
 
@@ -120,7 +122,6 @@ public class ArmorTrimController {
         if (material != null) {
             d.setMaterial(material.trimMaterial);
 
-            refreshGUI(player);
             return;
         }
 

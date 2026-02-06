@@ -2,6 +2,7 @@ package at.vailan.armortrimedit.listener;
 
 import at.vailan.armortrimedit.Permissions;
 import at.vailan.armortrimedit.gui.ArmorTrimGUI;
+import at.vailan.armortrimedit.gui.ArmorTrimGUIOpener;
 import at.vailan.armortrimedit.manager.ArmorTrimController;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
@@ -47,6 +48,7 @@ public class EventListener implements Listener {
                     return;
                 }
                 controller.applyTrim(player);
+                refreshGUI(player);
             }
 
             case ArmorTrimGUI.REMOVE_SLOT -> {
@@ -55,6 +57,7 @@ public class EventListener implements Listener {
                     return;
                 }
                 controller.removeTrim(player);
+                refreshGUI(player);
             }
 
             case ArmorTrimGUI.CLOSE_SLOT -> player.closeInventory();
@@ -67,6 +70,11 @@ public class EventListener implements Listener {
     private void handlePatternOrMaterialClick(Player player, String name) {
         ArmorTrimController controller = ArmorTrimController.get();
         controller.select(player, name);
+        refreshGUI(player);
+    }
+
+    private void refreshGUI(Player player) {
+        ArmorTrimGUIOpener.open(player);
     }
 
     @EventHandler
